@@ -15,16 +15,19 @@ public class aPPh {
     }
 
     static double PTKP(boolean status, int haveDependants){
+        //
         double basicPTKP = 54000000;
         double married = 4500000;
         double dependants = 4500000;
+        //
+
         if (haveDependants > 3)
             haveDependants = 3;
-        if (status)
+
+        if (status) //
             return (basicPTKP + married + haveDependants * dependants);
         else
             return (basicPTKP + haveDependants * dependants);
-
     }
 
     static void storePKP(double salaryGross){
@@ -65,7 +68,8 @@ public class aPPh {
         }
 
         //if (pkpValue < 60000000) phhValue = 0;
-        if (pkpValue <= first_Bracket)  total_1_Brckt = first_Bracket * 0.05;
+        if (pkpValue <= first_Bracket)
+            total_1_Brckt = pkpValue * 0.05;
         else if (pkpValue <= second_Bracket){
             total_1_Brckt = first_Bracket * 0.05;
             total_2_Brckt = (pkpValue - first_Bracket) * 0.15;
@@ -82,17 +86,13 @@ public class aPPh {
             total_4_Brckt = (pkpValue - 500000000) * 0.30;
         }
 
-        // in case below zero or negative number
-        if (total_2_Brckt < 0 || total_3_Brckt < 0 || total_4_Brckt < 0){
-            total_2_Brckt = 0; total_3_Brckt = 0; total_4_Brckt = 0;
-        }
 
         phhValue = total_1_Brckt + total_2_Brckt + total_3_Brckt + total_4_Brckt;
 
         double penalty = 0.20; // for no NPWP
 
         if (!NPWP) // input sc is false
-             return phhValue += phhValue * penalty;
+             return phhValue * (1 + penalty);
         else return phhValue; // if input is true
     }
 
